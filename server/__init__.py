@@ -1,14 +1,9 @@
 # server/__init__.py
 
-
-#################
-#### imports ####
-#################
-
 import os
 import logging
 
-from flask import Flask, render_template
+from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 
@@ -20,10 +15,6 @@ from server.utils import InvalidAPIUsage
 from server.utils import html_codes
 
 
-################
-#### config ####
-################
-
 app = Flask(
     __name__,
     static_folder='./static'
@@ -34,27 +25,16 @@ app_settings = os.getenv('APP_SETTINGS', 'server.config.DevelopmentConfig')
 app.config.from_object(app_settings)
 
 
-####################
-#### extensions ####
-####################
-
 bcrypt = Bcrypt(app)
 cache = create_cache(app)
 db = SQLAlchemy(app)
 cors = CORS(app)
 logger = logging.getLogger(__name__)
 
-###################
-### blueprints ####
-###################
 
 from server.auth.views import auth_blueprint
 app.register_blueprint(auth_blueprint)
 
-
-###################
-### flask-login ####
-###################
 
 from server.models import User
 

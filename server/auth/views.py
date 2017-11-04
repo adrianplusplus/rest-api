@@ -1,5 +1,4 @@
 # flask_app/auth/views.py
-# Uses https://github.com/realpython/flask-jwt-auth/ as reference.
 
 from flask import Blueprint, request, make_response, jsonify
 from flask.views import MethodView

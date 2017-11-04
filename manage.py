@@ -5,6 +5,8 @@ import coverage
 
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
+from server import app, db
+from server.models import User
 
 COV = coverage.coverage(
     branch=True,
@@ -16,10 +18,6 @@ COV = coverage.coverage(
     ]
 )
 COV.start()
-
-from server import app, db
-from server.models import User
-
 
 migrate = Migrate(app, db)
 manager = Manager(app)

@@ -21,7 +21,8 @@ class TestUserModel(BaseTestCase):
         ret_val = encode_auth_token(user.id)
         self.assertTrue(isinstance(ret_val, bytes))
         self.assertTrue(
-             ret_val == 'unsupported type for timedelta seconds component: NoneType'
+            ret_val ==
+            'unsupported type for timedelta seconds component: NoneType'
         )
 
     def test_encode_auth_token(self):

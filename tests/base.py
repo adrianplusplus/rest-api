@@ -11,7 +11,7 @@ from server.factory import create_app, create_user
 class BaseTestCase(TestCase):
 
     def create_app(self):
-        new_app = create_app('testing', app)
+        new_app = create_app('server.config.TestingConfig', app)
         create_user(new_app, db, User)
         return new_app
 

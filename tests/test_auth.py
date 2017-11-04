@@ -138,8 +138,8 @@ class TestAuthBlueprint(BaseTestCase):
             # user login
             resp_login = login_user(
                 self,
-                'test@qti.qualcomm.com',
-                'TestCNS2016@'
+                'test@tourister.com',
+                'TestTourister2017@'
             )
             print(resp_login.data.decode())
             data_login = json.loads(resp_login.data.decode())
