@@ -2,7 +2,7 @@
 
 import unittest
 
-from server import db, app
+from server.extensions import db
 from server.models import User
 from server.utils.tokens import encode_auth_token, decode_auth_token
 from tests.base import BaseTestCase
@@ -11,7 +11,7 @@ from tests.base import BaseTestCase
 class TestUserModel(BaseTestCase):
 
     def test_no_jwt_max_age(self):
-        app.config['JWT_MAX_AGE'] = None
+        self.app.config['JWT_MAX_AGE'] = None
         user = User(
             email='test@test.com',
             password='test'

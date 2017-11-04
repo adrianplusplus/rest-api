@@ -17,6 +17,8 @@ pip install virtualenv
 #create virtualenv
 virtualenv env
 
+# activate:
+
 # for linux
 source env/bin/activate
 
@@ -34,23 +36,21 @@ pip install -r requirements.txt`
 ### Set Environment Variables
 
 ```bash
-$ export APP_SETTINGS="server.config.DevelopmentConfig"
+$ export FLASK_CONFIGURATION="server.config.DevelopmentConfig"
 ```
 
 or
 
 ```bash
-$ export APP_SETTINGS="server.config.ProductionConfig"
+$ export FLASK_CONFIGURATION="server.config.ProductionConfig"
 ```
 
-### Create DB
+### Create DB and run migrations
 
 ```bash
 $ python manage.py create_db
 $ python manage.py db init
 $ python manage.py db migrate
-$ python manage.py create_admin
-$ python manage.py create_data
 ```
 
 ### Run the Application

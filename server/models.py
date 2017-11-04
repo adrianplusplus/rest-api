@@ -3,7 +3,8 @@
 
 import datetime
 
-from server import app, db, bcrypt
+from flask import current_app as app
+from server.extensions import db, bcrypt
 
 
 class User(db.Model):

@@ -56,4 +56,5 @@ class TestingConfig(BaseConfig):
 class ProductionConfig(BaseConfig):
     """Production configuration."""
     SECRET_KEY = os.getenv('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/example'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + \
+        os.path.join(BaseConfig.BASEDIR, 'prod.sqlite')

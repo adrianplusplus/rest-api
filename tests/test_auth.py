@@ -5,7 +5,7 @@ import time
 import json
 import unittest
 
-from server import db
+from server.extensions import db
 from server.models import User, BlacklistToken
 from tests.base import BaseTestCase
 
@@ -141,7 +141,6 @@ class TestAuthBlueprint(BaseTestCase):
                 'test@tourister.com',
                 'TestTourister2017@'
             )
-            print(resp_login.data.decode())
             data_login = json.loads(resp_login.data.decode())
             self.assertTrue(data_login['status'] == 'success')
             self.assertTrue(data_login['message'] == 'Successfully logged in.')

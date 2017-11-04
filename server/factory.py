@@ -1,31 +1,29 @@
-# !/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""Docstring for module."""
-
-
-import os
+# server/factory.py
 
 from flask import Flask
-from server.utils import setup_logger
-from flask_cache import Cache
+from server.utils.logging_ext import setup_logger
+from server.extensions import db, cache, bcrypt, cors
+from server.models import User
 
 
-def create_cache(app):
-    return Cache(app, config={'CACHE_TYPE': app.config['CACHE_TYPE']})
-
-
-def create_app(config='default', app=None):
+def create_app(config='server.config.DevelopmentConfig', app=None):
 
     # Configure the app w.r.t Flask, databases, loggers.
     if app is None:
-        app = Flask(__name__)
-    config_name = os.getenv('FLASK_CONFIGURATION', config)
-    app.config.from_object(config_name)
-    setup_logger(app.config['LOGGING_LOCATION'], app)
+        app = Flask(__name__, static_folder='./static')
+    app.config.from_object(config)
+    setup_logger(app.config['LOGGING_LOCATION'], app.config['LOGGING_LEVEL'])
     return app
 
 
-def create_user(app, db, User):
+def setup_extensions(app):
+    db.init_app(app)
+    cache.init_app(app)
+    bcrypt.init_app(app)
+    cors.init_app(app)
+
+
+def create_users(app):
 
     db.create_all()
 

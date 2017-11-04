@@ -1,14 +1,12 @@
-"""Implicit module which returns token-expiry time from Flask-security."""
+# server/utils/tokens.py
+
 import datetime
 import jwt
 import json
-import logging
-from flask import jsonify, request, make_response, after_this_request
-from server import app
+from flask import jsonify, request, make_response, after_this_request, \
+    current_app as app
 from server.models import BlacklistToken
 from server.utils import html_codes
-
-logger = logging.getLogger(__name__)
 
 
 def jwt_required(func):

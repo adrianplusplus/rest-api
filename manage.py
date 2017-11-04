@@ -5,7 +5,8 @@ import coverage
 
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
-from server import app, db
+from server.extensions import db
+from server import app
 from server.models import User
 
 COV = coverage.coverage(

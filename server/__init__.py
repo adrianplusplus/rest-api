@@ -2,41 +2,18 @@
 
 import os
 import logging
-
-from flask import Flask
-from flask_bcrypt import Bcrypt
-from flask_sqlalchemy import SQLAlchemy
-
-# auth
 from flask import jsonify, make_response
-from server.factory import create_app, create_user, create_cache
-from flask_cors import CORS
-from server.utils import InvalidAPIUsage
+from server.factory import create_app, create_users, setup_extensions
+from server.utils.errors import InvalidAPIUsage
 from server.utils import html_codes
+from server.blueprints.auth.views import auth_blueprint
 
-
-app = Flask(
-    __name__,
-    static_folder='./static'
-)
-
-
-app_settings = os.getenv('APP_SETTINGS', 'server.config.DevelopmentConfig')
-app.config.from_object(app_settings)
-
-
-bcrypt = Bcrypt(app)
-cache = create_cache(app)
-db = SQLAlchemy(app)
-cors = CORS(app)
+app_settings = os.getenv('FLASK_CONFIGURATION', 'server.config.DevelopmentConfig')
+app = create_app(app_settings)
+setup_extensions(app)
 logger = logging.getLogger(__name__)
 
-
-from server.auth.views import auth_blueprint
-app.register_blueprint(auth_blueprint)
-
-
-from server.models import User
+app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
 
 @app.errorhandler(Exception)
@@ -62,4 +39,4 @@ def index():
 
 @app.before_first_request
 def init():
-    create_user(app, db, User)
+    create_users(app)
