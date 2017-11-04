@@ -1,1 +1,1 @@
-# server/blueprints/auth/__ini__.py
+# server/blueprints/auth/__init__.py

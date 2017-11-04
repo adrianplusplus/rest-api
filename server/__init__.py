@@ -7,6 +7,7 @@ from server.factory import create_app, create_users, setup_extensions
 from server.utils.errors import InvalidAPIUsage
 from server.utils import html_codes
 from server.blueprints.auth.views import auth_blueprint
+from server.blueprints.api.views import api_blueprint
 
 app_settings = os.getenv('FLASK_CONFIGURATION', 'server.config.DevelopmentConfig')
 app = create_app(app_settings)
@@ -14,6 +15,7 @@ setup_extensions(app)
 logger = logging.getLogger(__name__)
 
 app.register_blueprint(auth_blueprint, url_prefix='/auth')
+app.register_blueprint(api_blueprint, url_prefix='/api')
 
 
 @app.errorhandler(Exception)
