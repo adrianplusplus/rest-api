@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
 
 # C extensions
 *.so
@@ -32,12 +33,14 @@ wheels/
 *.spec
 
 # Installer logs
+log
 pip-log.txt
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports
 htmlcov/
 .tox/
+coverage
 .coverage
 .coverage.*
 .cache
@@ -99,3 +102,8 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# misc
+.DS_Store
+.settings
+*.bak
