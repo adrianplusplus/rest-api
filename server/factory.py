@@ -10,7 +10,7 @@ def create_app(config='server.config.DevelopmentConfig', app=None):
 
     # Configure the app w.r.t Flask, databases, loggers.
     if app is None:
-        app = Flask(__name__, static_folder='./static')
+        app = Flask(__name__)
     app.config.from_object(config)
     setup_logger(app.config['LOGGING_LOCATION'], app.config['LOGGING_LEVEL'])
     return app

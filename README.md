@@ -6,6 +6,16 @@
 
 Contains the flask backend with JWT authentication methods and a GraphQL API
 
+### Dockerized Version
+
+The current build is using `nginx` to serve static files.
+
+1. In project root directory execute `docker build .`
+
+2. Execute `docker run -p 5000:8080 <IMAGE ID>`
+
+3. Navigate to `http://localhost:5000`
+
 ### Basics
 
 1. Create and activate a virtualenv
