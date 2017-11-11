@@ -15,8 +15,8 @@ class TestAPI(BaseTestCase):
             # user login
             resp_login = login_user(
                 self,
-                'test@qti.qualcomm.com',
-                'TestAvante2017@'
+                'test@tourister.com',
+                'TestTourister2017@'
             )
             data = json.loads(resp_login.get_data().decode())
             # valid api call
