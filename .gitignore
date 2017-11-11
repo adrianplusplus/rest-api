@@ -40,6 +40,7 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
+*.coverage
 coverage
 .coverage
 .coverage.*
@@ -107,3 +108,20 @@ ENV/
 .DS_Store
 .settings
 *.bak
+*.idea
+migrations
+*.sqlite
+*.db
+
+# temp files
+temp
+tmp
+
+# avante files
+raw
+*.mp4
+*.jpg
+annotations.json
+metrics.json
+route.json
+*.egg-info

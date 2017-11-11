@@ -1,10 +1,10 @@
-# Tourister Backend
+# Avante Service API
 
-[![Build Status](https://travis-ci.org/TODO?branch=master)](https://travis-ci.org/TODO)
+[![Build Status](https://TODO/TODO?branch=master)](https://TODO/TODO)
 
 ## Quick Start
 
-Contains the flask backend with JWT authentication methods and a GraphQL API
+Contains the flask backend with JWT authentication methods, a GraphQL and REST API
 
 ### Dockerized Version
 
@@ -55,7 +55,24 @@ or
 $ export FLASK_CONFIGURATION="server.config.ProductionConfig"
 ```
 
-### Create DB and run migrations
+Set a SECRET_KEY
+
+```sh
+$ export SECRET_KEY="change_me"
+```
+
+### Create DB (Optional)
+
+Create the databases in `psql`:
+
+```sh
+$ psql
+# create database avante_service_api
+# create database avante_service_api_test
+# \q
+```
+
+### Create DB tables and run migrations (Optional)
 
 ```bash
 $ python manage.py create_db
