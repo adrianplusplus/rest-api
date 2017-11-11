@@ -1,7 +1,8 @@
 # server/blueprints/api/views.py
 
 from flask import Blueprint, make_response, jsonify, request
-from server.utils import errors, html_codes, tokens
+from server.utils import errors, html_codes
+from server.core import tokens
 
 
 api_blueprint = Blueprint('api', __name__)

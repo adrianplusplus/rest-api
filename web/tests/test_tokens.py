@@ -4,7 +4,7 @@ import unittest
 
 from server.extensions import db
 from server.models import User
-from server.utils.tokens import encode_auth_token, decode_auth_token
+from server.core.tokens import encode_auth_token, decode_auth_token
 from tests.base import BaseTestCase
 
 

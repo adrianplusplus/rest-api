@@ -112,6 +112,8 @@ ENV/
 migrations
 *.sqlite
 *.db
+tourister_service_api
+tourister_service_api_test
 
 # temp files
 temp

@@ -4,7 +4,7 @@ from flask import Blueprint, request, make_response, jsonify, \
     current_app as app
 from server.extensions import bcrypt, db
 from server.models import User, BlacklistToken
-from server.utils.tokens import jwt_required, encode_auth_token
+from server.core.tokens import jwt_required, encode_auth_token
 from server.utils import html_codes
 from server.utils.errors import InvalidAPIUsage
 
