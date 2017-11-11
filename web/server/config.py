@@ -18,7 +18,7 @@ class BaseConfig(object):
     TESTING = False
     BCRYPT_LOG_ROUNDS = 13
 
-    DATABASE_NAME = 'avante_service_api'
+    DATABASE_NAME = 'tourister_service_api'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     POSTGRES_LOCAL_BASE = 'postgresql://postgres:@localhost/'
 
@@ -34,8 +34,8 @@ class BaseConfig(object):
 
     DEFAULT_USERS = [
         {
-            'email': 'test@qti.qualcomm.com',
-            'password': 'TestAvante2017@',
+            'email': 'test@tourister.com',
+            'password': 'TestTourister2017@',
             'admin': True
         }
     ]
