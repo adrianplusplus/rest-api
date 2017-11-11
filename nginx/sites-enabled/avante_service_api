@@ -1,7 +1,7 @@
 server {
 
     listen 80;
-    server_name avante_service_api;
+    server_name tourister_service_api;
     charset utf-8;
 
     location /static {
