@@ -64,8 +64,8 @@ Create the databases in `psql`:
 
 ```sh
 $ psql
-# create database avante_service_api
-# create database avante_service_api_test
+# create database tourister_service_api
+# create database tourister_service_api_test
 # \q
 ```
 
