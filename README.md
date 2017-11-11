@@ -1,10 +1,10 @@
-# Avante Service API
+# Tourister Service API
 
 [![Build Status](https://TODO/TODO?branch=master)](https://TODO/TODO)
 
 ## Quick Start
 
-Contains the flask backend with JWT authentication methods, a GraphQL and REST API
+Contains the flask backend with JWT authentication methods, and a REST API
 
 ### Dockerized Version
 
@@ -21,11 +21,8 @@ The current build is using `nginx` to serve static files.
 1. Create and activate a virtualenv
 
 ```bash
-# install virtualenv globally
-pip install virtualenv
-
 #create virtualenv
-virtualenv env
+python -m venv env
 
 # activate:
 
