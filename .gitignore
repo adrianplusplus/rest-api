@@ -116,12 +116,3 @@ migrations
 # temp files
 temp
 tmp
-
-# avante files
-raw
-*.mp4
-*.jpg
-annotations.json
-metrics.json
-route.json
-*.egg-info
