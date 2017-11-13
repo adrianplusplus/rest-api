@@ -32,7 +32,6 @@ mccabe==0.6.1
 pycodestyle==2.3.1
 pycparser==2.18
 PyJWT==1.4.2
-Flask-Cache
 psycopg2==2.6.2
 gunicorn==19.3.0
 pylint==1.7.4
