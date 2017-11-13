@@ -2,9 +2,9 @@
 
 from flask import Blueprint, make_response, jsonify, request
 from flask_restful import  Api
-from web.server.utils import errors, html_codes
-from web.server.core import tokens
-from web.server.blueprints.resources import touristers, services
+from server.utils import errors, html_codes
+from server.core import tokens
+from server.blueprints.resources import touristers, services
 
 api_blueprint = Blueprint('api', __name__)
 api = Api(api_blueprint)
