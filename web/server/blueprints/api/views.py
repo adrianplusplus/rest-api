@@ -1,11 +1,13 @@
 # server/blueprints/api/views.py
 
 from flask import Blueprint, make_response, jsonify, request
+from flask_restful import  Api
 from server.utils import errors, html_codes
 from server.core import tokens
-
+from server.blueprints.resources import touristers, services
 
 api_blueprint = Blueprint('api', __name__)
+api = Api(api_blueprint)
 
 
 @api_blueprint.route('/get_data', methods=['GET'])
@@ -36,3 +38,9 @@ def protected_get_data():
         )
     data = {'Heroes': ['Hero1', 'Hero2', 'Hero3']}
     return make_response(jsonify(data), html_codes.HTTP_OK_BASIC)
+
+
+api.add_resource(touristers.Tourister, '/touristers/<id>')
+api.add_resource(touristers.TouristerList, '/touristers')
+api.add_resource(services.Service, '/services/<id>')
+api.add_resource(services.ServiceList, '/services') 

@@ -118,3 +118,6 @@ tourister_service_api_test
 # temp files
 temp
 tmp
+
+#ide files
+.vscode
