@@ -36,23 +36,21 @@ class User(Base):
         self.admin = admin
 
 
-class BlacklistToken(db.Model):
+class BlacklistToken(Base):
     """
     Token Model for storing JWT tokens
     """
     __tablename__ = 'blacklist_tokens'
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     token = db.Column(db.String(500), unique=True, nullable=False)
 
     def __init__(self, token):
         self.token = token
 
 
-class ServiceDetail(db.Model):
+class RideshareDetail(Base):
     """ The detail of a service a tourister can offer """
 
-    id = db.Column(db.Integer, primary_key=True)
     service_id = db.Column(db.Integer, db.ForeignKey('services.id'), nullable=False)
 
     price = db.Column(db.Float)
@@ -64,68 +62,62 @@ class ServiceDetail(db.Model):
     capacity = db.Column(db.Integer)
 
     additionalInfo = db.relationship(
-        'ServiceAdditionalInfo', backref='service', lazy='dynamic')
+        'RideshareAdditionalInfo', backref='rideshare', lazy='dynamic')
 
 
-class ServiceAdditionalInfo(db.Model):
+class RideshareAdditionalInfo(Base):
     """ Additional info that can be added to a tourister service """
-
-    id = db.Column(db.Integer, primary_key=True)
-    service_detail_id = db.Column(db.Integer, db.ForeignKey('service_detail.id'), nullable=False)
+ 
+    rideshare_detail_id = db.Column(db.Integer, db.ForeignKey('rideshare_detail.id'), nullable=False)
 
     value = db.Column(db.String(100))
     
 
 
-class ServicePerks(db.Model):
+class ServicePerks(Base):
     """ perks that can be added to a tourister service """
-
-    id = db.Column(db.Integer, primary_key=True)
+ 
     service_id = db.Column(db.Integer, db.ForeignKey('services.id'), nullable=False)
 
     value = db.Column(db.String(100))
     
 
 
-class Service(db.Model):
+class Service(Base):
     """ services a tourister can offer """
 
     __tablename__ = 'services'
 
-    id = db.Column(db.Integer, primary_key=True)
     trip_id = db.Column(db.Integer, db.ForeignKey('trips.id'), nullable=False)
     
     type = db.Column(db.String(30))
     perks = db.relationship('ServicePerks', backref='service', lazy='dynamic')
     details = db.relationship(
-        'ServiceDetail', backref='service', uselist=False)
+        'RideshareDetail', backref='service', uselist=False)
 
 
-class Occupation(db.Model):
-    """ ?? """
+class Occupation(Base):
+    """ Occupations touristers can exercise (to find matches) """
 
     __tablename__ = 'occupations'
 
-    id = db.Column(db.Integer, primary_key=True)
     tourister_id = db.Column(db.Integer, db.ForeignKey('touristers.id'), nullable=False)
 
     name = db.Column(db.String(30), nullable=False)
     affiliation = db.Column(db.String(30))
 
 
-class TripHighlight(db.Model):
+class TripHighlight(Base):
     """ highlights a trip can have """
 
-    id = db.Column(db.Integer, primary_key=True)
     trip_id = db.Column(db.Integer, db.ForeignKey('trips.id'), nullable=False)
 
     value = db.Column(db.String(50), nullable=False)
 
 
-class TripPricing(db.Model):
+class TripPricing(Base):
     """ different pricing models for trips a tourister can provide """
 
-    id = db.Column(db.Integer, primary_key=True)
     trip_id = db.Column(db.Integer, db.ForeignKey('trips.id'), nullable=False)
     
     regular = db.Column(db.Float)
@@ -133,12 +125,11 @@ class TripPricing(db.Model):
     overtimePrice = db.Column(db.Float)
 
 
-class Trip(db.Model):
+class Trip(Base):
     """ trips a tourister has done """
 
     __tablename__ = 'trips'
 
-    id = db.Column(db.Integer, primary_key=True)
     tourister_id = db.Column(db.Integer, db.ForeignKey('touristers.id'), nullable=False)
 
     name = db.Column(db.String(30))
@@ -150,79 +141,63 @@ class Trip(db.Model):
     services = db.relationship('Service', backref='service', lazy='dynamic')
 
 
-class Language(db.Model):
+class Language(Base):
     """ languages a tourister can speak/understand """
 
     __tablename__ = 'languages'
 
-    id = db.Column(db.Integer, primary_key=True)
     tourister_id = db.Column(db.Integer, db.ForeignKey('touristers.id'), nullable=False)
 
     name = db.Column(db.String(10), nullable=False)
     proficiency = db.Column(db.String(10), nullable=False)
 
-class PaypalInfo(db.Model):
+class PaypalInfo(Base):
     """ information needed to use user's paypal """
 
-    id = db.Column(db.Integer, primary_key=True)
     tourister_id = db.Column(db.Integer, db.ForeignKey('touristers.id'), nullable=False)
 
     email = db.Column(db.String(100), nullable=False)
 
-class Education(db.Model):
+class Education(Base):
     """ education of a tourister """
 
-    id = db.Column(db.Integer, primary_key=True)
     tourister_id = db.Column(db.Integer, db.ForeignKey('touristers.id'), nullable=False)
 
     school = db.Column(db.String(30))
     degree = db.Column(db.String(30))
 
-class SocialNetwork(db.Model):
+class SocialNetwork(Base):
     """ different social networks of a tourister """
 
-    id = db.Column(db.Integer, primary_key=True)
     tourister_id = db.Column(db.Integer, db.ForeignKey('touristers.id'), nullable=False)
 
     type = db.Column(db.String(30))
     src = db.Column(db.String(200))
 
-class ExperienceLevel(db.Model):
-    """ experience levesl of a tourister """
 
-    id = db.Column(db.Integer, primary_key=True)
-    tourister_id = db.Column(db.Integer, db.ForeignKey('touristers.id'), nullable=False)
-
-    customersServed = db.Column(db.Integer)
-    rating = db.Column(db.Float)
-
-
-class Testimonial(db.Model):
+class Testimonial(Base):
     """ testimonials given by touristees """
 
-    id = db.Column(db.Integer, primary_key=True)
     tourister_id = db.Column(db.Integer, db.ForeignKey('touristers.id'), nullable=False)
 
-    username = db.Column(db.String(30), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user = db.relationship("User", uselist=False)
     story = db.Column(db.String(800), nullable=False)
 
-class Image(db.Model):
+class Image(Base):
     """ for storing image urls """
-
-    id = db.Column(db.Integer, primary_key=True)
 
     name = db.Column(db.String(50))
     src = db.Column(db.String(1000))
     type = db.Column(db.String(50))
 
-class Activity(db.Model):
+class Activity(Base):
     """ activities a tourister has done """
     
-    id = db.Column(db.Integer, primary_key=True)
     tourister_id = db.Column(db.Integer, db.ForeignKey('touristers.id'), nullable=False)
     image_id = db.Column(db.Integer, db.ForeignKey('image.id'), nullable=False)
     
-    detail = db.Column(db.String(300))
+    detail = db.Column(db.String(300), nullable=False)
 
     image = db.relationship("Image", uselist=False)
 
@@ -234,12 +209,11 @@ class TouristerImage(db.Model):
     tourister_id = db.Column(db.Integer, db.ForeignKey('touristers.id'), nullable=False)
     image_id = db.Column(db.Integer, db.ForeignKey('image.id'), nullable = False)
 
-class Tourister(db.Model):
+class Tourister(Base):
     """ defines what a tourister can be """
 
     __tablename__ = 'touristers'
 
-    id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     firstname = db.Column(db.String(30), nullable=False)
@@ -248,14 +222,13 @@ class Tourister(db.Model):
     username = db.Column(db.String(30), nullable=False)
     mainLocation = db.Column(db.String(30))
     story = db.Column(db.String(800))
-
+    
     occupations = db.relationship('Occupation', backref='tourister', lazy='dynamic')
     languages = db.relationship('Language', backref='tourister', lazy='dynamic')
-    allTrips = db.relationship('Trip', backref='tourister', lazy='dynamic')
-    payPalInfo = db.relationship('PaypalInfo', backref='tourister', uselist=False)
+    trips = db.relationship('Trip', backref='tourister', lazy='dynamic')
+    paypalInfo = db.relationship('PaypalInfo', backref='tourister')
     education = db.relationship('Education', backref='tourister', lazy='dynamic')
     socialNetworks = db.relationship("SocialNetwork", backref='tourister', lazy='dynamic')
-    experienceLevel = db.relationship("ExperienceLevel", backref='tourister', uselist=False)
     testimonials = db.relationship("Testimonial", backref='tourister', lazy='dynamic')
     activities = db.relationship('Activity', backref='tourister', lazy='dynamic')
     images = db.relationship("Image", secondary='tourister_images')

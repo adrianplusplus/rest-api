@@ -9,13 +9,13 @@ class BlacklistTokenSchema(ModelSchema):
     class Meta:
         model = models.BlacklistToken
 
-class ServiceDetailSchema(ModelSchema):
+class RideshareDetailSchema(ModelSchema):
     class Meta:
-        model = models.ServiceDetail
+        model = models.RideshareDetail
 
-class ServiceAdditionalInfoSchema(ModelSchema):
+class RideshareAdditionalInfoSchema(ModelSchema):
     class Meta:
-        model = models.ServiceAdditionalInfo
+        model = models.RideshareAdditionalInfo
 
 class ServicePerksSchema(ModelSchema):
     class Meta:
@@ -23,8 +23,8 @@ class ServicePerksSchema(ModelSchema):
         
 class ServiceSchema(ModelSchema):
     perks = fields.Nested(ServicePerksSchema, many=True)
-    additionalInfo = fields.Nested(ServiceAdditionalInfoSchema, many=True)
-    details = fields.Nested(ServiceDetailSchema)
+    additionalInfo = fields.Nested(RideshareAdditionalInfoSchema, many=True)
+    details = fields.Nested(RideshareDetailSchema)
     class Meta:
         model = models.Service
 
@@ -65,10 +65,6 @@ class SocialNetworkSchema(ModelSchema):
     class Meta:
         model  = models.SocialNetwork
 
-class ExperienceLevelSchema(ModelSchema):
-    class Meta:
-        model = models.ExperienceLevel
-
 class TestimonialSchema(ModelSchema):
     class Meta:
         model = models.Testimonial
@@ -86,11 +82,10 @@ class ActivitySchema(ModelSchema):
 class TouristerSchema(ModelSchema):
     occupations = fields.Nested(OccupationSchema,many=True)
     languages = fields.Nested(LanguageSchema,many=True)
-    allTrips = fields.Nested(TripSchema,many=True)
-    payPalInfo = fields.Nested(PaypalInfoSchema)
+    trips = fields.Nested(TripSchema,many=True)
+    paypalInfo = fields.Nested(PaypalInfoSchema, many=True)
     education = fields.Nested(EducationSchema, many=True)
     socialNetworks = fields.Nested(SocialNetworkSchema, many=True)
-    experienceLevel = fields.Nested(ExperienceLevelSchema)
     testimonials = fields.Nested(TestimonialSchema, many=True)
     activities = fields.Nested(ActivitySchema, many=True)
     images = fields.Nested(ImageSchema, many=True)
