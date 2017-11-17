@@ -21,3 +21,7 @@ RUN chown -R app:app /server
 WORKDIR /server
 
 USER app
+
+EXPOSE 8000
+
+CMD ["/usr/bin/gunicorn", "-w 2", "-b :8000", "wsgi:app"]
